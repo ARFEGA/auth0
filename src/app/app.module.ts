@@ -27,8 +27,8 @@ import { UserDataComponent } from './components/user-data/user-data.component';
     BrowserModule,
     AppRoutingModule,
     AuthModule.forRoot({
-      domain: 'dev-rn4s1fwo.eu.auth0.com',
-      clientId: 'PhH9I1FK9fQ76SHlHlh7RFLOHftfr4Iw'
+      domain: '',
+      clientId: ''
     })
   ],
   providers: [],
