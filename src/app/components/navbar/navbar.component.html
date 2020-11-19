@@ -1,1 +1,39 @@
-<p>navbar works!</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Auth0 App</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
+  aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="'/home'"  >Home</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="'prices'">Prices</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="'protected'">Protected</a>
+      </li>
+      <li *ngIf="auth.isAuthenticated$ | async" class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="'datauser'">Data User</a>
+      </li>
+    </ul>
+    <span class="navbar-text">
+      <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+        <button class="btn btn-outline-warning" (click)="auth.logout({ returnTo: document.location.origin })">
+          Log out
+        </button>
+      </ng-container>
+
+      <ng-template #loggedOut>
+        <button class="btn btn-outline-primary mr-1" (click)="auth.loginWithRedirect()">Log in</button>
+      </ng-template>
+
+      <!--
+      <button *ngIf="!auth.isAuthenticated$ | async" (click)="auth.loginWithRedirect()" class="btn btn-outline-primary mr-1">Login</button>
+      <button *ngIf="auth.isAuthenticated$ | async" (click)="auth.logout({ returnTo : document.location.origin})" class="btn btn-outline-warning">Log-Out</button>-->
+
+    </span>
+  </div>
+</nav>
